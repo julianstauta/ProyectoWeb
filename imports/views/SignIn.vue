@@ -27,6 +27,9 @@
                 required
               ></v-text-field>
             </v-flex>
+            <v-flex>
+              <v-checkbox v-model="disabled" label="Remember me"></v-checkbox>
+            </v-flex>
             <v-flex class="text-xs-center" mt-5>
               <v-btn dark type="button" @click="signIn">Sign In</v-btn>
             </v-flex>
@@ -38,21 +41,19 @@
 </template>
 
 <script>
-import { watch } from 'fs';
+import { watch } from "fs";
 export default {
   name: "signin",
   data() {
     return {
+      disabled: false,
       email: "",
       password: ""
     };
   },
   methods: {
     signIn: function() {
-      if (
-        this.email === "" ||
-        this.password === ""
-      ) {
+      if (this.email === "" || this.password === "") {
         alert("You must fill all the fields.");
       } else {
         this.$store.dispatch("signUserIn", {
@@ -64,13 +65,13 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.getters.user
+      return null;
     }
   },
   watch: {
-    user(value){
-      if(value!==null && value!==undefined){
-        this.$router.push("users")
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push("users");
       }
     }
   }
