@@ -103,12 +103,12 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.getters.user;
+      return null;
     },
     dependencies() {
       let dependencies = [];
       let dependencies_names = [];
-      dependencies = this.$store.getters.dependencies;
+      dependencies = [];
       for (let i = 0; i < dependencies.length; i++) {
         dependencies_names.push(dependencies[i].name);
       }
