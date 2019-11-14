@@ -13,7 +13,7 @@ Vue.use(VueMeteorTracker)
 
 //import router  from  '../imports/ui/router'
 
-import App from  './imports/ui/App'
+import App from  '../imports/ui/App'
 import './main.html'
 
 
