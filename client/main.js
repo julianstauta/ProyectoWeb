@@ -11,7 +11,7 @@ import VueMeteorTracker  from 'vue-meteor-tracker'
 
 Vue.use(VueMeteorTracker)
 
-//import router  from  '../imports/ui/router'
+import router  from  '../imports/ui/router'
 
 import App from  './imports/ui/App'
 import './main.html'
@@ -21,7 +21,7 @@ Meteor.startup(() => {
    new Vue ({
      el: "#app", 
      vuetify,
-     //router,
+     router,
      ...App
    }) 
 })

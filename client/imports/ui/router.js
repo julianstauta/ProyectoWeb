@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import AuthGuard from './authguard'
+import AuthGuard from '../authguard'
 
 const routerOptions = [
   { path: "/", component: "SignIn" },
@@ -12,7 +12,7 @@ const routerOptions = [
   { path: "*", component: "NotFound" }
 ];
 
-const routes = routerOptions.map(route => {
+const router = routerOptions.map(route => {
   return {
     ...route,
     component: () => import(`./views/${route.component}.vue`)
@@ -23,5 +23,5 @@ Vue.use(Router);
 
 export default new Router({
   mode: "history",
-  routes
+  router
 });
