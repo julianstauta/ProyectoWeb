@@ -2,6 +2,7 @@ import  { Meteor } from  'meteor/meteor'
 import  Vue from 'vue'
 import  Vuetify from  'vuetify'
 import 'vuetify/dist/vuetify.css'
+import './main.css'
 
 Vue.use(Vuetify)
 

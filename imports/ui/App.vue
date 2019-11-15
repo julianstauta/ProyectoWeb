@@ -1,21 +1,25 @@
 <template>
   <v-app>
     <div>
-      <v-app-bar color="black" dark>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar color="#212121" dark>
 
-        <v-toolbar-title>Sistema Dependencias</v-toolbar-title>
-
-        <div class="flex-grow-1"></div>
-
+        <v-toolbar-title>Esports Manager</v-toolbar-title>
+        
         <v-toolbar-items v-for="item in menuItems" :key="item.title" :name="item.title">
-          <template v-if="item.title==='Log out'">
-            <v-btn @click="onLogout" color="black" to="signin">{{item.title}}</v-btn>
-          </template>
-          <template v-else>
-            <v-btn :to="item.path" color="black">{{item.title}}</v-btn>
+          <template>
+            <v-btn text :to="item.path" color="white" style="text-transform:none">{{item.title}}</v-btn>
           </template>
         </v-toolbar-items>
+        <div class="flex-grow-1"></div>
+        <div v-for="item in authOptions" :key="item.title" :name="item.title">
+          <template v-if="item.title==='Log out'">
+            <v-btn text @click="onLogout" color="white" to="signin">{{item.title}}</v-btn>
+          </template>
+          <template v-else>
+            <v-btn class="mybtn" outlined depressed :to="item.path" style="text-transform:none">{{item.title}}</v-btn>
+          </template>
+          <v-spacer></v-spacer>
+        </div>
       </v-app-bar>
     </div>
 
@@ -37,19 +41,25 @@ export default {
   computed: {
     menuItems() {
       let menuItems = [
+        { title: "Home", path: "/a" },
+        { title: "Players", path: "/b" },
+        { title: "Fantasy League", path: "/c" },
+        { title: "My Teams", path: "/d" },
+      ];
+      return menuItems;
+    },
+    authOptions(){
+      let authOptions = [
         { title: "Sign Up", path: "/signup" },
         { title: "Sign In", path: "/signin" }
       ];
       if (this.userIsAuthenticated) {
-        menuItems = [
-          { title: "Users", path: "/users" },
-          { title: "Dependencies", path: "/dependencies" },
+        authOptions = [
           { title: "Log out", path: "/signin" }
         ];
-      }
-      return menuItems;
-    },
-
+      };
+      return authOptions;
+    }
   },
   methods: {
     onLogout() {
@@ -59,4 +69,10 @@ export default {
 };
 </script>
 <style>
+.mybtn {
+  border-color: #F2C94C !important;
+  color: "white";
+  margin-left: 10px;
+  border-radius: 10px;
+}
 </style>
