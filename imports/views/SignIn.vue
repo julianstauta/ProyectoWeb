@@ -1,18 +1,18 @@
 <template>
   <v-container fluid>
-    <v-layout row wrap>
+    <v-card class="mx-auto" max-width="450">
       <v-flex xs12 class="text-xs-center" mt-5>
         <h1>Sign In</h1>
       </v-flex>
-      <v-flex xs12 sm4 offset-sm4 mt-3>
+      <v-flex xs12 sm8 offset-sm2 mt-3>
         <form>
           <v-layout column>
             <v-flex>
               <v-text-field
-                name="email"
-                label="Email"
-                id="email"
-                type="email"
+                name="username"
+                label="Username"
+                id="username"
+                type="username"
                 required
                 v-model="email"
               ></v-text-field>
@@ -28,15 +28,20 @@
               ></v-text-field>
             </v-flex>
             <v-flex>
-              <v-checkbox v-model="disabled" label="Remember me"></v-checkbox>
+              <v-checkbox v-model="remember" label="Remember me"></v-checkbox>
             </v-flex>
             <v-flex class="text-xs-center" mt-5>
-              <v-btn dark type="button" @click="signIn">Sign In</v-btn>
+              <v-btn block dark type="button" @click="signIn">Sign In</v-btn>
+            </v-flex>
+            <v-flex mt-5 mb-5>
+              <router-link :to="{ path: '/' }">Forgot your password?</router-link>
+              <v-spacer></v-spacer>
+              <router-link :to="{ path: '/signup' }">Create new acount</router-link>
             </v-flex>
           </v-layout>
         </form>
       </v-flex>
-    </v-layout>
+    </v-card>
   </v-container>
 </template>
 
@@ -46,18 +51,18 @@ export default {
   name: "signin",
   data() {
     return {
-      disabled: false,
-      email: "",
+      remember: false,
+      username: "",
       password: ""
     };
   },
   methods: {
     signIn: function() {
-      if (this.email === "" || this.password === "") {
+      if (this.username === "" || this.password === "") {
         alert("You must fill all the fields.");
       } else {
         this.$store.dispatch("signUserIn", {
-          email: this.email,
+          username: this.username,
           password: this.password
         });
       }
