@@ -1,22 +1,36 @@
 <template>
   <v-container fluid>
-    <v-layout row wrap>
+    <v-card class="signinchart" max-width="800" style="background-color: #222222">
       <v-flex xs12 class="text-xs-center" mt-5>
-        <h1>Sign Up</h1>
+        <h1 class="Wtext">Sign Up</h1>
       </v-flex>
-      <v-flex xs12 sm6 offset-sm3 mt-3>
+      <v-flex xs12 sm10 offset-sm1 mt-3>
         <form>
           <v-layout column>
             <v-flex>
-              <v-text-field name="name" label="Name" id="name" v-model="name" required></v-text-field>
+              <v-text-field
+                name="name"
+                label="Name"
+                id="name"
+                placeholder="Name"
+                v-model="name"
+                required
+                dark
+                outlined
+                color="#F2C94C"
+              ></v-text-field>
             </v-flex>
             <v-flex>
               <v-text-field
-                name="lastnamee"
+                name="lastname"
                 label="Last Name"
                 id="lastname"
+                placeholder="Last Name"
                 v-model="lastname"
                 required
+                dark
+                outlined
+                color="#F2C94C"
               ></v-text-field>
             </v-flex>
             <v-flex>
@@ -25,12 +39,55 @@
                 label="Email"
                 id="email"
                 type="email"
+                placeholder="e-mail"
                 v-model="email"
                 required
+                dark
+                outlined
+                color="#F2C94C"
               ></v-text-field>
             </v-flex>
             <v-flex>
-              <v-select v-model="dependency" :items="dependencies" label="Dependency"></v-select>
+              <v-row justify="space-around">
+                <div class="d-flex align-center" style="color:white">Gender</div>
+                <v-col cols="3">
+                  <v-checkbox v-model="male" dark label="Male"></v-checkbox>
+                </v-col>
+                <v-col cols="3">
+                  <v-checkbox v-model="female" dark label="Female"></v-checkbox>
+                </v-col>
+                <v-col cols="3">
+                  <v-checkbox v-model="others" dark label="Other"></v-checkbox>
+                </v-col>
+              </v-row>
+            </v-flex>
+            <v-flex>
+              <v-row justify="space-around">
+                <div class="d-flex align-center" style="color:white">Birth date</div>
+                <v-col cols="3">
+                  <v-select dark v-model="month" :items="month"></v-select>
+                </v-col>
+                <v-col cols="3">
+                  <v-select dark v-model="day" :items="day"></v-select>
+                </v-col>
+                <v-col cols="3">
+                  <v-select dark v-model="year" :items="year"></v-select>
+                </v-col>
+              </v-row>
+            </v-flex>
+            <v-flex>
+              <v-select
+                v-model="country"
+                :items="country"
+                label="Country"
+                placeholder="Select your country"
+                dark
+                outlined
+                color="#F2C94C"
+              ></v-select>
+            </v-flex>
+            <v-flex>
+              <v-text-field v-model="value" label="Phone Number" dark outlined color="#F2C94C"></v-text-field>
             </v-flex>
             <v-flex>
               <v-text-field
@@ -38,27 +95,43 @@
                 label="Password"
                 id="password"
                 type="password"
+                placeholder="Password"
                 v-model="password"
                 required
+                dark
+                outlined
+                color="#F2C94C"
               ></v-text-field>
             </v-flex>
             <v-flex>
               <v-text-field
                 name="confirmPassword"
                 label="Confirm Password"
+                placeholder="Confirm Password"
                 id="confirmPassword"
                 type="password"
                 v-model="cpassword"
                 required
+                dark
+                outlined
+                color="#F2C94C"
               ></v-text-field>
             </v-flex>
-            <v-flex class="text-xs-center" mt-5>
-              <v-btn dark type="button" @click="signUp">Sign Up</v-btn>
+            <v-flex class="text-xs-center" mt-5 mb-5>
+              <v-btn
+                class="mybtn"
+                block
+                outlined
+                color="white"
+                style="text-transform:none"
+                type="button"
+                @click="signUp"
+              >Sign Up</v-btn>
             </v-flex>
           </v-layout>
         </form>
       </v-flex>
-    </v-layout>
+    </v-card>
   </v-container>
 </template>
 
@@ -67,6 +140,9 @@ export default {
   name: "signup",
   data() {
     return {
+      male: false,
+      female: false,
+      others: false,
       name: "",
       lastname: "",
       dependency: "",

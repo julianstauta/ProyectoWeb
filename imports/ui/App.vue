@@ -3,7 +3,7 @@
     <div>
       <v-app-bar color="#212121" dark>
 
-        <v-toolbar-title>Esports Manager</v-toolbar-title>
+        <v-toolbar-title style="margin: 10px">Esports Manager</v-toolbar-title>
         
         <v-toolbar-items v-for="item in menuItems" :key="item.title" :name="item.title">
           <template>
@@ -23,7 +23,7 @@
       </v-app-bar>
     </div>
 
-    <v-content>
+    <v-content class="bground" >
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -74,5 +74,23 @@ export default {
   color: "white";
   margin-left: 10px;
   border-radius: 10px;
+}
+*, body{
+  margin: 0;
+  padding: 0;
+
+}
+.bground{
+  background-color: #303030;
+}
+.Wtext{
+  color: white !important;
+  font-weight:normal;
+  text-decoration: none;
+}
+.signinchart {
+  margin: auto;
+  background-color: #303030;
+  padding-top: 5px;
 }
 </style>
