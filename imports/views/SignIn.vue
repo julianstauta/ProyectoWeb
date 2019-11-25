@@ -14,7 +14,7 @@
                 placeholder="Username"
                 id="username"
                 type="username"
-                v-model="email"
+                v-model="username"
                 dark
                 outlined
                 color= "#F2C94C">

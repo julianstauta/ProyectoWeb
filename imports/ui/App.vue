@@ -41,7 +41,7 @@ export default {
   computed: {
     menuItems() {
       let menuItems = [
-        { title: "Home", path: "/a" },
+        { title: "Home", path: "/home" },
         { title: "Players", path: "/b" },
         { title: "Fantasy League", path: "/c" },
         { title: "My Teams", path: "/d" },
