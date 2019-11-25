@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 
 import SignIn from '../views/SignIn'
 import SignUp from '../views/SignUp'
+import PlayerDetail from '../views/PlayerDetail'
+import Players from '../views/Players'
 import NotFound from '../views/NotFound'
 
 Vue.use(VueRouter)
@@ -12,6 +14,8 @@ const routes = [
   { path: "/", name:"root", component: SignIn },
   { path: "/signin", name:"signin", component: SignIn },
   { path: "/signup", name:"signup", component: SignUp },
+  { path: "/myteams", name:"myteams", component: PlayerDetail},
+  { path: "/players", name:"players", component: Players},
   //{ path: "/users", name:"users", component: "Users" , beforeEnter: AuthGuard},
   //{ path: "/dependencies", name:"dependencies", component: "Dependencies" , beforeEnter: AuthGuard},
   { path: "*", name:"notfound", component: NotFound }

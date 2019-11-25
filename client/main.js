@@ -10,7 +10,7 @@ const opts = {}
 const vuetify = new Vuetify(opts)
 import VueMeteorTracker  from 'vue-meteor-tracker'
 
-Vue.use(VueMeteorTracker)
+Vue.use(VueMeteorTracker);
 
 import router  from  '../imports/ui/router'
 

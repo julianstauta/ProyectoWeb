@@ -42,9 +42,9 @@ export default {
     menuItems() {
       let menuItems = [
         { title: "Home", path: "/a" },
-        { title: "Players", path: "/b" },
+        { title: "Players", path: "/players" },
         { title: "Fantasy League", path: "/c" },
-        { title: "My Teams", path: "/d" },
+        { title: "My Teams", path: "/myteams" },
       ];
       return menuItems;
     },
@@ -92,5 +92,6 @@ export default {
   margin: auto;
   background-color: #303030;
   padding-top: 5px;
+  justify-content: center !important;
 }
 </style>
