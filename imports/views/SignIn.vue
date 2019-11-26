@@ -9,12 +9,12 @@
           <v-layout column>
             <v-flex>
               <v-text-field 
-                name="username"
-                label="Username"
-                placeholder="Username"
-                id="username"
-                type="username"
-                v-model="username"
+                name="email"
+                label="Email"
+                placeholder="Email"
+                id="email"
+                type="email"
+                v-model="email"
                 dark
                 outlined
                 color= "#F2C94C">
@@ -60,13 +60,15 @@
 </template>
 
 <script>
+const axios = require("axios");
+const url = "http://localhost:3000"
 import { watch } from "fs";
 export default {
   name: "signin",
   data() {
     return {
       remember: false,
-      username: "",
+      email: "",
       password: ""
     };
   },
@@ -75,9 +77,24 @@ export default {
       if (this.username === "" || this.password === "") {
         alert("You must fill all the fields.");
       } else {
-        this.$store.dispatch("signUserIn", {
-          username: this.username,
+        axios
+        .post(url+"/api/login", {
+          email: this.email,
           password: this.password
+        })
+        .then(response => {
+          if (response.status == 200) {
+            localStorage.setItem("user", this.user);
+            this.$emit("validUser", true);
+            this.$router.push({ path: "home" });
+          }
+        })
+        .catch(error => {
+          if (error.response.status == 401) {
+            alert(error.response.data.message);
+          } else {
+            alert("Unexpected error, please contact the admin");
+          }
         });
       }
     }

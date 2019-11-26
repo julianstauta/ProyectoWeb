@@ -1,6 +1,5 @@
-import { store } from '../../TFLC/src/store'
 export default (to, from, next) => {
-    if(store.getters.user){
+    if(localStorage.getItem("user")!==null){
         next()
     } else{
         next('signin')

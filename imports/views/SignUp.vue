@@ -48,46 +48,16 @@
               ></v-text-field>
             </v-flex>
             <v-flex>
-              <v-row justify="space-around">
-                <div class="d-flex align-center" style="color:white">Gender</div>
-                <v-col cols="3">
-                  <v-checkbox v-model="male" dark label="Male"></v-checkbox>
-                </v-col>
-                <v-col cols="3">
-                  <v-checkbox v-model="female" dark label="Female"></v-checkbox>
-                </v-col>
-                <v-col cols="3">
-                  <v-checkbox v-model="others" dark label="Other"></v-checkbox>
-                </v-col>
-              </v-row>
-            </v-flex>
-            <v-flex>
-              <v-row justify="space-around">
-                <div class="d-flex align-center" style="color:white">Birth date</div>
-                <v-col cols="3">
-                  <v-select dark v-model="month" :items="month"></v-select>
-                </v-col>
-                <v-col cols="3">
-                  <v-select dark v-model="day" :items="day"></v-select>
-                </v-col>
-                <v-col cols="3">
-                  <v-select dark v-model="year" :items="year"></v-select>
-                </v-col>
-              </v-row>
-            </v-flex>
-            <v-flex>
-              <v-select
-                v-model="country"
-                :items="country"
-                label="Country"
-                placeholder="Select your country"
+              <v-text-field
+                v-model="phone"
+                label="Phone Number"
+                id="phone"
+                type="phone"
+                placeholder="Phone number"
                 dark
                 outlined
                 color="#F2C94C"
-              ></v-select>
-            </v-flex>
-            <v-flex>
-              <v-text-field v-model="value" label="Phone Number" dark outlined color="#F2C94C"></v-text-field>
+              ></v-text-field>
             </v-flex>
             <v-flex>
               <v-text-field
@@ -136,6 +106,8 @@
 </template>
 
 <script>
+const axios = require("axios");
+const url = "http://localhost:3000"
 export default {
   name: "signup",
   data() {
@@ -145,7 +117,7 @@ export default {
       others: false,
       name: "",
       lastname: "",
-      dependency: "",
+      phone: "",
       email: "",
       password: "",
       cpassword: ""
@@ -156,7 +128,7 @@ export default {
       if (
         this.name === "" ||
         this.lastname === "" ||
-        this.dependency === "" ||
+        this.phone === "" ||
         this.email === "" ||
         this.password === "" ||
         this.cpassword === ""
@@ -167,13 +139,27 @@ export default {
       } else if (this.password.length < 6) {
         alert("Password must be at least 6 digists long.");
       } else {
-        this.$store.dispatch("signUserUp", {
-          name: this.name,
-          lastname: this.lastname,
-          email: this.email,
-          dependency: this.dependency,
-          password: this.password
-        });
+        axios
+          .post(url + "/api/singup", {
+            name: this.name,
+            lastname: this.lastname,
+            email: this.email,
+            phone: this.phone,
+            password: this.password
+          })
+          .then(response => {
+            if (response.status == 200) {
+              this.$emit("validUser", true);
+              this.$router.push({ path: "signin" });
+            }
+          })
+          .catch(error => {
+            if (error.response.status == 401) {
+              alert(error.response.data.message);
+            } else {
+              alert("Unexpected error, please contact the admin");
+            }
+          });
       }
     }
   },

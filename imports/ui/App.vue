@@ -12,8 +12,8 @@
         </v-toolbar-items>
         <div class="flex-grow-1"></div>
         <div v-for="item in authOptions" :key="item.title" :name="item.title">
-          <template v-if="item.title==='Log out'">
-            <v-btn text @click="onLogout" color="white" to="signin">{{item.title}}</v-btn>
+          <template v-if="userIsAuthenticated()">
+            <v-btn class="mybtn" outlined depressed text @click="onLogout()" color="white" to="signin">{{item.title}}</v-btn>
           </template>
           <template v-else>
             <v-btn class="mybtn" outlined depressed :to="item.path" style="text-transform:none">{{item.title}}</v-btn>
@@ -53,7 +53,7 @@ export default {
         { title: "Sign Up", path: "/signup" },
         { title: "Sign In", path: "/signin" }
       ];
-      if (this.userIsAuthenticated) {
+      if (this.userIsAuthenticated()) {
         authOptions = [
           { title: "Log out", path: "/signin" }
         ];
@@ -63,7 +63,12 @@ export default {
   },
   methods: {
     onLogout() {
-      this.$store.dispatch("logout");
+      localStorage.removeItem("user");
+    },
+    userIsAuthenticated() {
+      return (
+        localStorage.getItem("user") !== null && localStorage.getItem("user")!==undefined
+      );
     }
   }
 };

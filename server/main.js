@@ -71,12 +71,12 @@ app.get('/api/getTeam/:teamname', (req, res) => {
 
  app.post('/api/login', (req, res) => {
 
-  const user = req.body.user
+  const email = req.body.email
   const password = req.body.password
 
   const users = db.collection("users");
 
-  users.find({ "user": user }).toArray(function (err, result) {
+  users.find({ "email": email }).toArray(function (err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -98,27 +98,25 @@ app.post('/api/singup', (req, res) => {
   const name = req.body.name
   const lastname = req.body.lastname
   const email = req.body.email
-  const gender = req.body.gender
-  const birthdate = req.body.birthdate
   const phone = req.body.phone
   const password = req.body.password
 
   const users = db.collection("users");
 
-  users.find({ "user": user }).toArray(function (err, result) {
+  users.find({ "email": email }).toArray(function (err, result) {
     if (err) {
       console.log(err)
     } else {
       if (result.length == 0) {
 
         var newUser = {
-          "name": name, "lastname": lastname, "email": email, "gender": gender, "birthdate": birthdate, "country": country, "phone": phone, "password": password, uteams: [],
+          "name": name, "lastname": lastname, "email": email, "phone": phone, "password": password, uteams: [],
         };
-
+        
+        console.log(newUser)
         users.insertOne(newUser, function (err, res) {
           if (err) throw err;
         });
-
         res.status(200).json({ message: 'User added successfully' });
       } else {
         res.status(401).json({ message: 'User already exists' });

@@ -138,7 +138,7 @@
 
 <script>
 const axios = require("axios");
-const url = "http://localhost:3000";
+const url = "http://localhost:3000"
 export default {
   // components: {
   //   apexchart: VueApexCharts

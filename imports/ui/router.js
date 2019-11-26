@@ -9,6 +9,8 @@ import PlayerSelection from '../views/PlayerSelection'
 import PlayerDetail from '../views/PlayerDetail'
 import Players from '../views/Players'
 import NotFound from '../views/NotFound'
+import AuthGuard from '../authguard'
+import MyTeams from '../views/MyTeams'
 
 Vue.use(VueRouter)
 
@@ -19,8 +21,8 @@ const routes = [
   { path: "/home", name:"home", component: Home },
   { path: "/selection", name:"selection", component: PlayerSelection },
   { path: "/playerdetail", name:"playerdetail", component: PlayerDetail},
-  { path: "/players", name:"players", component: Players},
-  //{ path: "/users", name:"users", component: "Users" , beforeEnter: AuthGuard},
+  { path: "/players", name:"players", component: Players, beforeEnter: AuthGuard},
+  { path: "/myteams", name:"myteams", component: MyTeams},
   //{ path: "/dependencies", name:"dependencies", component: "Dependencies" , beforeEnter: AuthGuard},
   { path: "*", name:"notfound", component: NotFound }
 ];
