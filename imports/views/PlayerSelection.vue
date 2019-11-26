@@ -65,7 +65,7 @@
 
 <script>
 const axios = require("axios");
-const url = "http://localhost:3000"
+const url = "http://localhost:3000";
 import PlayerTable from "../components/PlayerTable";
 import SearchTable from "../components/SearchTable";
 export default {
@@ -103,10 +103,10 @@ export default {
           console.log(error);
           alert("Oh no, error.");
         });
-    },
-    created() {
-      this.getPlayers();
     }
+  },
+  beforeMount() {
+    this.getPlayers();
   }
 };
 </script>

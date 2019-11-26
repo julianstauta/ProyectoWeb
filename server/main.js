@@ -44,10 +44,45 @@ app.get('/api/getPlayers/', (req, res) => {
   });
 });
 
+app.get('/api/getMatches/:league', (req, res) => {
+  const player = db.collection("matches");
+  const league = req.params.league;
+   player.find({"league": league}).toArray(function (err, result) {
+     if (err) {
+       res.status(500).send(err);
+     } else {
+       res.send(result);
+     }    
+   });
+ });
+
 app.get('/api/getTeam/:teamname', (req, res) => {
   const teamname = req.params.teamname;
   const teams = db.collection("teams");
    teams.find({"name": teamname}).toArray(function (err, result) {
+     if (err) {
+       res.status(500).send(err);
+     } else {
+       res.send(result);
+     }    
+   });
+ });
+
+ app.get('/api/getTeam', (req, res) => {
+  const teams = db.collection("teams");
+   teams.find({}).toArray(function (err, result) {
+     if (err) {
+       res.status(500).send(err);
+     } else {
+       res.send(result);
+     }    
+   });
+ });
+
+ app.get('/api/getTeamLeague/:league', (req, res) => {
+  const league = req.params.league;
+  const teams = db.collection("teams");
+   teams.find({"league": league}).toArray(function (err, result) {
      if (err) {
        res.status(500).send(err);
      } else {
