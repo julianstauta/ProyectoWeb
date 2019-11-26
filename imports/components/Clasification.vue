@@ -7,11 +7,11 @@
     </tr>
 
     <tr v-for="team in teams" :key="team.name">
-      <td>{{ team.pos }}</td>
+      <td>{{ team.position }}</td>
       <td>
         <v-row justify="start">
           <v-col cols="2">
-            <v-img :src="team.img" max-width="100" max-height="100"></v-img>
+            <v-img :src="team.logo" max-width="100" max-height="100"></v-img>
           </v-col>
           <v-col cols="10">{{team.name}}</v-col>
         </v-row>

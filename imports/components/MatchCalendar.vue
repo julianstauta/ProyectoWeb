@@ -5,27 +5,29 @@
       <th class="text-center">MATCH CALENDAR</th>
     </tr>
 
-    <tr v-for="match in calendar" :key="match.nameone">
+    <tr v-for="match in calendar" :key="match.team1">
       <td>{{ match.time }}</td>
       <td>
         <v-row justify="start">
-          <v-col cols="3" class="text-right">{{match.nameone}}</v-col>
+          <v-col cols="3" class="text-right">{{match.team1}}</v-col>
           <v-col cols="2">
-            <v-img :src="match.imgone" max-width="100" max-height="100"></v-img>
+            <v-img :src="getImg(match.team1)" max-width="100" max-height="100"></v-img>
           </v-col>
           <v-col cols="2">
             <v-img :src="duel" max-width="50" max-height="50"></v-img>
           </v-col>
           <v-col cols="2">
-            <v-img :src="match.imgtwo" max-width="100" max-height="100"></v-img>
+            <v-img :src="getImg(match.team2)" max-width="100" max-height="100"></v-img>
           </v-col>
-          <v-col cols="3" class="text-left">{{match.nametwo}}</v-col>
+          <v-col cols="3" class="text-left">{{match.team2}}</v-col>
         </v-row>
       </td>
     </tr>
   </table>
 </template>
 <script>
+const axios = require("axios");
+const url = "http://localhost:3000";
 export default {
   data() {
     return {
@@ -34,8 +36,31 @@ export default {
     };
   },
   props: {
-    calendar: Array
-  }
+    calendar: Array,
+    teams: Array
+  },
+  methods: {
+    getTeams(name) {
+      axios
+        .get(url + "/api/getTeam/" + name)
+        .then(response => {
+          console.log(response.data[0].logo);
+          return "https://cdn2.iconfinder.com/data/icons/long-live-the-queen-1/60/swords-512.png";
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getImg(name) {
+      this.teams.forEach(element => {
+        if(element.name == name){
+          console.log(element.logo)
+          return element.logo
+        }
+      });
+    }
+  },
+  beforeMount() {}
 };
 </script>
 <style>
@@ -50,6 +75,6 @@ td {
 table {
   border-collapse: collapse;
   background-color: black;
-  width:100%;
+  width: 100%;
 }
 </style>

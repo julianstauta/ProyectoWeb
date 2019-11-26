@@ -43,7 +43,7 @@ export default {
       let menuItems = [
         { title: "Home", path: "/home" },        
         { title: "Players", path: "/players" },
-        { title: "Fantasy League", path: "/c" },
+        { title: "Fantasy League", path: "/selection" },
         { title: "My Teams", path: "/myteams" },
       ];
       return menuItems;
