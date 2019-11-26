@@ -15,7 +15,7 @@
               color="white"
               style="text-transform:none"
               type="button"
-              @click="autopick"
+              @click="getPlayers()"
             >Autopick</v-btn>
             <div class="Wtext">Players Select</div>
           </v-col>
@@ -48,7 +48,7 @@
         <div class="Wtext">Search</div>
         <v-text-field v-model="search" label="Search" dark single-line outlined color="#F2C94C"></v-text-field>
         <search-table :players="players"></search-table>
-        <br/>
+        <br />
         <v-btn
           class="mybtn"
           block
@@ -64,6 +64,8 @@
 </template>
 
 <script>
+const axios = require("axios");
+const url = "http://localhost:3000"
 import PlayerTable from "../components/PlayerTable";
 import SearchTable from "../components/SearchTable";
 export default {
@@ -82,25 +84,29 @@ export default {
       price: "Low First",
       prices: ["Low First", "High First"],
       search: "",
+      players: [],
       rift:
-        "https://sites.google.com/site/leagueoflegendscolombia/_/rsrc/1472775682339/home/la-grieta-del-invocador/hwaXBDe.jpg",
-      players: [
-        {
-          img:
-            "https://am-a.akamaihd.net/image?f=https://lolstatic-a.akamaihd.net/esports-assets/production/team/infinity-esports-6066ele6.png",
-          name: "Cotopaco",
-          role: "Mid",
-          kda: 6.5,
-          price: 10000,
-          playerimg: ""
-        }
-      ]
+        "https://sites.google.com/site/leagueoflegendscolombia/_/rsrc/1472775682339/home/la-grieta-del-invocador/hwaXBDe.jpg"
     };
   },
   methods: {
     reset: function() {},
     autopick: function() {},
-    create: function() {}
+    create: function() {},
+    getPlayers() {
+      axios
+        .get(url + "/api/getPlayers/")
+        .then(response => {
+          this.players = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Oh no, error.");
+        });
+    },
+    created() {
+      this.getPlayers();
+    }
   }
 };
 </script>
