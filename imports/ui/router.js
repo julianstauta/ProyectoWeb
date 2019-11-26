@@ -18,7 +18,7 @@ const routes = [
   { path: "/signup", name:"signup", component: SignUp },
   { path: "/home", name:"home", component: Home },
   { path: "/selection", name:"selection", component: PlayerSelection },
-  { path: "/myteams", name:"myteams", component: PlayerDetail},
+  { path: "/playerdetail", name:"playerdetail", component: PlayerDetail},
   { path: "/players", name:"players", component: Players},
   //{ path: "/users", name:"users", component: "Users" , beforeEnter: AuthGuard},
   //{ path: "/dependencies", name:"dependencies", component: "Dependencies" , beforeEnter: AuthGuard},

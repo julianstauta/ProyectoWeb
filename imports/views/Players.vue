@@ -32,7 +32,7 @@
           </template>
           <template v-slot:item.action="{ item }">
             <v-icon medium>monetization_on</v-icon>
-            <v-icon medium>info</v-icon>
+            <v-icon medium @click="goInfoPlayer(item)">info</v-icon>
           </template>
         </v-data-table>
       </v-flex>
@@ -41,6 +41,8 @@
 </template>
 
 <script>
+const axios = require("axios");
+const url = "http://localhost:3000"
 export default {
   data() {
     return {
@@ -48,78 +50,79 @@ export default {
       name: "",
       role: "",
       roles: ["Top Laner", "Jungler", "Middle Laner", "Bot Laner", "Support"],
-      players: [
-        {
-          name: "Faker",
-          role: "Middle Laner",
-          kda: 6.0,
-          winrate: 24,
-          price: 10000000
-        },
-        {
-          name: "The Shy",
-          role: "Top Laner",
-          kda: 6.0,
-          winrate: 37,
-          price: 10000000
-        },
-        {
-          name: "Teddy",
-          role: "Bot Laner",
-          kda: 16.0,
-          winrate: 23,
-          price: 10000000
-        },
-        {
-          name: "Seiya",
-          role: "Middle Laner",
-          kda: 3.7,
-          winrate: 67,
-          price: 10000000
-        },
-        {
-          name: "Crisp",
-          role: "Support",
-          kda: 16.0,
-          winrate: 49,
-          price: 10000000
-        },
-        {
-          name: "Tarzan",
-          role: "Jungler",
-          kda: 0.0,
-          winrate: 94,
-          price: 10000000
-        },
-        {
-          name: "Bjergsen",
-          role: "Middle Laner",
-          kda: 0.2,
-          winrate: 98,
-          price: 10000000
-        },
-        {
-          name: "Cotopaco",
-          role: "Middle Laner",
-          kda: 3.2,
-          winrate: 87,
-          price: 10000000
-        },
-        {
-          name: "Perkz",
-          role: "Bot Laner",
-          kda: 25.0,
-          winrate: 51,
-          price: 10000000
-        },
-        {
-          name: "DoinB",
-          role: "Middle Laner",
-          kda: 26.0,
-          winrate: 65,
-          price: 10000000
-        }
-      ]
+      // players: [
+      //   {
+      //     name: "Faker",
+      //     role: "Middle Laner",
+      //     kda: 6.0,
+      //     cs_min: 24,
+      //     price: 10000000
+      //   },
+      //   {
+      //     name: "The Shy",
+      //     role: "Top Laner",
+      //     kda: 6.0,
+      //     cs_min: 37,
+      //     price: 10000000
+      //   },
+      //   {
+      //     name: "Teddy",
+      //     role: "Bot Laner",
+      //     kda: 16.0,
+      //     cs_min: 23,
+      //     price: 10000000
+      //   },
+      //   {
+      //     name: "Seiya",
+      //     role: "Middle Laner",
+      //     kda: 3.7,
+      //     cs_min: 67,
+      //     price: 10000000
+      //   },
+      //   {
+      //     name: "Crisp",
+      //     role: "Support",
+      //     kda: 16.0,
+      //     cs_min: 49,
+      //     price: 10000000
+      //   },
+      //   {
+      //     name: "Tarzan",
+      //     role: "Jungler",
+      //     kda: 0.0,
+      //     cs_min: 94,
+      //     price: 10000000
+      //   },
+      //   {
+      //     name: "Bjergsen",
+      //     role: "Middle Laner",
+      //     kda: 0.2,
+      //     cs_min: 98,
+      //     price: 10000000
+      //   },
+      //   {
+      //     name: "Cotopaco",
+      //     role: "Middle Laner",
+      //     kda: 3.2,
+      //     cs_min: 87,
+      //     price: 10000000
+      //   },
+      //   {
+      //     name: "Perkz",
+      //     role: "Bot Laner",
+      //     kda: 25.0,
+      //     cs_min: 51,
+      //     price: 10000000
+      //   },
+      //   {
+      //     name: "DoinB",
+      //     role: "Middle Laner",
+      //     kda: 26.0,
+      //     cs_min: 65,
+      //     price: 10000000
+      //   }
+      // ]
+      players: []
     };
   },
   computed: {
@@ -150,8 +153,8 @@ export default {
           value: "kda"
         },
         {
-          text: "Win Rate",
-          value: "winrate"
+          text: "CS Per Minute",
+          value: "cs_min"
         },
         {
           text: "Price",
@@ -174,7 +177,29 @@ export default {
       } else {
         return "https://vignette.wikia.nocookie.net/leagueoflegends/images/e/e0/Support_icon.png/revision/latest?cb=20181117143601";
       }
+    },
+
+    getPlayers() {
+      axios
+        .get(url + "/api/getPlayers/")
+        .then(response => {
+          this.players = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Oh no, error.");
+        });
+    },
+
+    goInfoPlayer(item){
+      let p = Object.assign({}, item);
+      localStorage.setItem("player",JSON.stringify(p));
+      this.$router.push({ path: "playerdetail" });
     }
+
+  },
+  beforeMount() {
+    this.getPlayers();
   }
 };
 </script>
