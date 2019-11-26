@@ -44,7 +44,6 @@ export default {
       axios
         .get(url + "/api/getTeam/" + name)
         .then(response => {
-          console.log(response.data[0].logo);
           return "https://cdn2.iconfinder.com/data/icons/long-live-the-queen-1/60/swords-512.png";
         })
         .catch(error => {
@@ -52,15 +51,22 @@ export default {
         });
     },
     getImg(name) {
-      this.teams.forEach(element => {
-        if(element.name == name){
-          console.log(element.logo)
-          return element.logo
+      console.log(this.teams)
+      for(i=0; i<this.teams.length; i++) {
+        console.log(this.teams[i].name)
+        if(this.teams[i].name == name){
+          console.log(this.teams[i].logo)
+          return this.teams[i].logo
         }
-      });
+      }
     }
   },
-  beforeMount() {}
+  mounted(){
+    console.log(this.teams)
+  },
+  beforeMount() {
+    console.log(this.getImg("All Knights"))
+  }
 };
 </script>
 <style>
