@@ -90,8 +90,8 @@ export default {
             "https://am-a.akamaihd.net/image?f=https://lolstatic-a.akamaihd.net/esports-assets/production/team/infinity-esports-6066ele6.png",
           name: "Cotopaco",
           role: "Mid",
-          kda: "6.5",
-          price: "10000",
+          kda: 6.5,
+          price: 10000,
           playerimg: ""
         }
       ]

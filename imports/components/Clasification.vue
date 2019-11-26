@@ -31,7 +31,7 @@ export default {
 table,
 th,
 td {
-  border: 1px solid black;
+  border: 1px solid gray;
   padding: 10px;
   color: white;
   vertical-align: center;
