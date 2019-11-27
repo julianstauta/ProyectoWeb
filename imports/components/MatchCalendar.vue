@@ -51,21 +51,16 @@ export default {
         });
     },
     getImg(name) {
-      console.log(this.teams)
       for(i=0; i<this.teams.length; i++) {
-        console.log(this.teams[i].name)
         if(this.teams[i].name == name){
-          console.log(this.teams[i].logo)
           return this.teams[i].logo
         }
       }
     }
   },
   mounted(){
-    console.log(this.teams)
   },
   beforeMount() {
-    console.log(this.getImg("All Knights"))
   }
 };
 </script>

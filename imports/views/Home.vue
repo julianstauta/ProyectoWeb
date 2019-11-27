@@ -19,7 +19,7 @@
       <v-carousel-item :key="i" v-for="i in 2">
         <v-layout row>
           <v-flex xs6 sm4 md2 :key="j" v-for="j in 6">
-            <cr-card :match="matches[0]"></cr-card>
+            <cr-card :match="matches[j]" :teams="allTeams"></cr-card>
           </v-flex>
         </v-layout>
       </v-carousel-item>
@@ -85,7 +85,8 @@ export default {
       axios
         .get(url + "/api/getTeam")
         .then(response => {
-          this.allTeams = response.data;
+          this.allTeams = response.data.sort((a, b) => parseInt(a.position) - parseInt(b.position));
+          console.log(this.allTeams)
         })
         .catch(error => {
           console.log(error);
